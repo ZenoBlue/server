@@ -1,0 +1,10 @@
+D:\服务器\MessageServer\MessageServer\bin\Release\MessageServer.exe.config
+D:\服务器\MessageServer\MessageServer\bin\Release\MessageServer.exe
+D:\服务器\MessageServer\MessageServer\bin\Release\MessageServer.pdb
+D:\服务器\MessageServer\MessageServer\bin\Release\MySql.Data.dll
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.MessageServer.resources
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.Properties.Resources.resources
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.csproj.GenerateResource.Cache
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.exe
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.pdb
+D:\服务器\MessageServer\MessageServer\obj\Release\MessageServer.csprojResolveAssemblyReference.cache

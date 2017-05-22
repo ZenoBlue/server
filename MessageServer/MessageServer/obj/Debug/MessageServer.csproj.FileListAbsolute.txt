@@ -1,0 +1,10 @@
+C:\Users\Zeno\Downloads\MessageServer\MessageServer\MessageServer\bin\Debug\MessageServer.exe.config
+D:\服务器\MessageServer\MessageServer\bin\Debug\MessageServer.exe.config
+D:\服务器\MessageServer\MessageServer\bin\Debug\MessageServer.exe
+D:\服务器\MessageServer\MessageServer\bin\Debug\MessageServer.pdb
+D:\服务器\MessageServer\MessageServer\obj\Debug\MessageServer.MessageServer.resources
+D:\服务器\MessageServer\MessageServer\obj\Debug\MessageServer.Properties.Resources.resources
+D:\服务器\MessageServer\MessageServer\obj\Debug\MessageServer.csproj.GenerateResource.Cache
+D:\服务器\MessageServer\MessageServer\obj\Debug\MessageServer.exe
+D:\服务器\MessageServer\MessageServer\obj\Debug\MessageServer.pdb
+D:\服务器\MessageServer\MessageServer\bin\Debug\MySql.Data.dll
