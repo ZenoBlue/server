@@ -17,8 +17,10 @@
 
         public Socket socket;
         public Print print;                     // 运行时的信息输出方法
-        public string receive_data;
+        public string receive_data;       //heart
+        public int count = 0;
         public Dictionary<string, Socket> clients = new Dictionary<string, Socket>();   // 存储连接到服务器的客户端信息   ip 和socket 
+        public Dictionary<string, int> ip = new Dictionary<string, int>();//存储心跳包
         public bool started = false;            // 标识当前是否启动了服务
         public Server(Print print = null, string ipString = null, int port = -1)
         {
@@ -56,8 +58,12 @@
 
                 if (print != null)
                 {
-                    try { print("启动服务【" + socket.LocalEndPoint.ToString() + "】成功"); }
-                    catch { print = null; }
+                    try
+                    {
+                        print("启动服务【" + socket.LocalEndPoint.ToString() + "】成功");
+                    }
+                    catch
+                    { print = null; }
                 }
                 started = true;
                 new Thread(listenClientConnect).Start(socket);  // 在新的线程中监听客户端连接
@@ -104,9 +110,10 @@
                 { 
                     Send(socket, info); 
                 }
-                catch(Exception ex)
+                catch
                 {
                     clients.Remove(id);
+                    ip.Remove(id);
                     if (print != null)
                        print("客户端已断开，【" + id + "】");
                 }
@@ -142,13 +149,18 @@
            
 
             Socket socket = (Socket) obj;
-
             string clientIp = socket.RemoteEndPoint.ToString();                 // 获取客户端标识 ip和端口
             if (!clients.ContainsKey(clientIp))
+            {
                 clients.Add(clientIp, socket);  // 将连接的客户端socket添加到clients中保存
-            else
-                clients[clientIp] = socket;
+                ip.Add(clientIp, 0);
+            }
 
+            else
+            {
+                clients[clientIp] = socket;
+                
+            }
             while (true)
             {
                 try
@@ -164,7 +176,7 @@
                         if (print != null)
                         {
 
-                            if (res > 0)                        //符合协议格式
+                            if (res > 0)                       //符合协议格式
                             {
                                 string constr = "server=localhost;User Id=root;password=;Database=factory_db";
                                 MySqlConnection mycon = new MySqlConnection(constr);
@@ -173,24 +185,37 @@
                                 string[] resultArry = result.Split('&'); //取出协议数据
                                 try
                                 {
-                                    MySqlCommand mycmd = new MySqlCommand("insert into manipulator_table(Manipulator_id,W_info, S_info,Y_info,D_info,roll_info,pitch_info,yaw_info,TIME) values ('" + resultArry[0] + "','" + resultArry[1] + "','" + resultArry[2] + "','" + resultArry[3] + "','" + resultArry[4] + "','" + resultArry[5] + "','" + resultArry[6] +"','"+ resultArry[7]+"','" + System.DateTime.Now + "');", mycon); //写入记录
+                                    MySqlCommand mycmd = new MySqlCommand("insert into manipulator_table(Manipulator_id,W_info, S_info,Y_info,D_info,roll_info,pitch_info,yaw_info,TIME) values ('" + resultArry[0] + "','" + resultArry[1] + "','" + resultArry[2] + "','" + resultArry[3] + "','" + resultArry[4] + "','" + resultArry[5] + "','" + resultArry[6] + "','" + resultArry[7] + "','" + System.DateTime.Now + "');", mycon); //写入记录
                                     mycmd.ExecuteNonQuery();
                                     mycon.Close();
                                     print("【" + clientIp + "】" + str + "写入成功");
+                                    Send("$heart", clientIp);
                                 }
                                 catch
                                 {
                                     print(str + "数据非法");
-                                }     
-                                    foreach (string key in clients.Keys)
+                                }
+                                foreach (string key in clients.Keys)
+                                {
+                                    if (ip[key] == 1)
                                     {
                                         Send(str, key);
                                         print("向" + key.ToString() + "转发成功");
-                                    }                            
+                                    }
+                                }
                             }
                             else
                             {
-                                print("【" + clientIp + "】" + "不是我方客户端，拒绝写入！");
+                                if (str.Equals("@zeno@"))
+                                {
+                                    ip[clientIp] = 1;
+                                    print("【" + clientIp + "】" + "握手成功！");
+                                }
+                                else
+                                {
+                                    print("【" + clientIp + "】" + "不是我方客户端，拒绝!");
+                                }
+                                str = "";
                             }
 
 
@@ -201,11 +226,14 @@
                 catch (Exception exception)
                 {
                     if (print != null) print("连接已自动断开，【" + clientIp + "】" + exception.Message);
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Close();
+                    //socket.Shutdown(SocketShutdown.Both);
+                    //socket.Close();
                     if (clients.ContainsKey(clientIp))
+                    {
                         clients.Remove(clientIp);
-                    return;
+                        ip.Remove(clientIp);
+                    }
+                    //return;
                 }
 
                 if (!started) return;

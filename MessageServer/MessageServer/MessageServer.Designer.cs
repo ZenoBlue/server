@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.textBox_Port = new System.Windows.Forms.TextBox();
             this.textBox_Ip = new System.Windows.Forms.TextBox();
             this.button_start = new System.Windows.Forms.Button();
@@ -37,7 +36,6 @@
             this.comboBox_clients = new System.Windows.Forms.ComboBox();
             this.label_clientIp = new System.Windows.Forms.Label();
             this.textBox_showing = new System.Windows.Forms.RichTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // textBox_Port
@@ -138,7 +136,6 @@
             this.Name = "MessageServer";
             this.Text = "服务器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MessageServer_FormClosed);
-            this.Load += new System.EventHandler(this.MessageServer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,7 +151,6 @@
         private System.Windows.Forms.ComboBox comboBox_clients;
         private System.Windows.Forms.Label label_clientIp;
         private System.Windows.Forms.RichTextBox textBox_showing;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

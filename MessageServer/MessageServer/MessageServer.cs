@@ -86,10 +86,5 @@ namespace MessageServer
                 comboBox_clients.DataSource = clientList;
             }
         }
-
-        private void MessageServer_Load(object sender, EventArgs e)
-        {
-            this.timer1.Start();
-        }
     }
 }
