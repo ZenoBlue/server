@@ -159,7 +159,6 @@
             else
             {
                 clients[clientIp] = socket;
-                
             }
             while (true)
             {
@@ -178,6 +177,7 @@
 
                             if (res > 0)                       //符合协议格式
                             {
+                                Send("$heart", clientIp);
                                 string constr = "server=localhost;User Id=root;password=;Database=factory_db";
                                 MySqlConnection mycon = new MySqlConnection(constr);
                                 mycon.Open();     //打开数据库
@@ -188,8 +188,7 @@
                                     MySqlCommand mycmd = new MySqlCommand("insert into manipulator_table(Manipulator_id,W_info, S_info,Y_info,D_info,roll_info,pitch_info,yaw_info,TIME) values ('" + resultArry[0] + "','" + resultArry[1] + "','" + resultArry[2] + "','" + resultArry[3] + "','" + resultArry[4] + "','" + resultArry[5] + "','" + resultArry[6] + "','" + resultArry[7] + "','" + System.DateTime.Now + "');", mycon); //写入记录
                                     mycmd.ExecuteNonQuery();
                                     mycon.Close();
-                                    print("【" + clientIp + "】" + str + "写入成功");
-                                    Send("$heart", clientIp);
+                                    print("【" + clientIp + "】" + str + "写入成功");                                   
                                 }
                                 catch
                                 {
@@ -226,12 +225,12 @@
                 catch (Exception exception)
                 {
                     if (print != null) print("连接已自动断开，【" + clientIp + "】" + exception.Message);
-                    //socket.Shutdown(SocketShutdown.Both);
+                    //socket.Shutdown(SocketShutdown.Send);
                     //socket.Close();
                     if (clients.ContainsKey(clientIp))
                     {
-                        clients.Remove(clientIp);
-                        ip.Remove(clientIp);
+                        //clients.Remove(clientIp);
+                        ip[clientIp] = 0;
                     }
                     //return;
                 }
