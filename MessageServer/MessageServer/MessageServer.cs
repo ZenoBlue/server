@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+/// 六轴机器人远程故障监测与预警系统v1.0
+/// ©韩山师范学院
+/// provide by 赵亮(Zeno)
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,6 +80,7 @@ namespace MessageServer
         {
             if (server != null)
                 server.stop();
+            System.Environment.Exit(0);
         }
 
         // 选择客户端时，更新客户端列表信息

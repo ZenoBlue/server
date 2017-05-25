@@ -1,4 +1,9 @@
-﻿namespace MessageServer
+﻿/// <summary>
+/// 六轴机器人远程故障监测与预警系统v1.0
+/// ©韩山师范学院
+/// provide by 赵亮(Zeno)
+/// </summary>
+namespace MessageServer
 {
     using MySql.Data.MySqlClient;
     using System;
@@ -178,14 +183,14 @@
                             if (res > 0)                       //符合协议格式
                             {
                                 Send("$heart", clientIp);
-                                string constr = "server=localhost;User Id=root;password=;Database=factory_db";
+                                string constr = "server=localhost;User Id=root;password=;Database=hanshi";
                                 MySqlConnection mycon = new MySqlConnection(constr);
                                 mycon.Open();     //打开数据库
                                 string result = str.Substring(res1, res);
                                 string[] resultArry = result.Split('&'); //取出协议数据
                                 try
                                 {
-                                    MySqlCommand mycmd = new MySqlCommand("insert into manipulator_table(Manipulator_id,W_info, S_info,Y_info,D_info,roll_info,pitch_info,yaw_info,TIME) values ('" + resultArry[0] + "','" + resultArry[1] + "','" + resultArry[2] + "','" + resultArry[3] + "','" + resultArry[4] + "','" + resultArry[5] + "','" + resultArry[6] + "','" + resultArry[7] + "','" + System.DateTime.Now + "');", mycon); //写入记录
+                                    MySqlCommand mycmd = new MySqlCommand("insert into "+resultArry[0]+"(W_info, S_info,Y_info,D_info,roll_info,pitch_info,yaw_info,Time) values ('" + resultArry[1] + "','" + resultArry[2] + "','" + resultArry[3] + "','" + resultArry[4] + "','" + resultArry[5] + "','" + resultArry[6] + "','" + resultArry[7] + "','" + System.DateTime.Now + "');", mycon); //写入记录
                                     mycmd.ExecuteNonQuery();
                                     mycon.Close();
                                     print("【" + clientIp + "】" + str + "写入成功");                                   

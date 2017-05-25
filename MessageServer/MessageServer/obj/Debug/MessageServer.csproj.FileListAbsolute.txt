@@ -17,3 +17,4 @@ D:\server\MessageServer\MessageServer\bin\Debug\MessageServer.exe.config
 D:\server\MessageServer\MessageServer\bin\Debug\MessageServer.exe
 D:\server\MessageServer\MessageServer\bin\Debug\MessageServer.pdb
 D:\server\MessageServer\MessageServer\bin\Debug\MySql.Data.dll
+D:\server\MessageServer\MessageServer\obj\Debug\MessageServer.csprojResolveAssemblyReference.cache

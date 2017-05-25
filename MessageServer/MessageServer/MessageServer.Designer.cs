@@ -1,4 +1,9 @@
-﻿namespace MessageServer
+﻿/// <summary>
+/// 六轴机器人远程故障监测与预警系统v1.0
+/// ©韩山师范学院
+/// provide by 赵亮(Zeno)
+/// </summary>
+namespace MessageServer
 {
     partial class MessageServer
     {
@@ -28,6 +33,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageServer));
             this.textBox_Port = new System.Windows.Forms.TextBox();
             this.textBox_Ip = new System.Windows.Forms.TextBox();
             this.button_start = new System.Windows.Forms.Button();
@@ -36,6 +42,7 @@
             this.comboBox_clients = new System.Windows.Forms.ComboBox();
             this.label_clientIp = new System.Windows.Forms.Label();
             this.textBox_showing = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_Port
@@ -120,11 +127,22 @@
             this.textBox_showing.TabIndex = 22;
             this.textBox_showing.Text = "";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(435, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 17);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "v1.0 provide by zeno";
+            // 
             // MessageServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 525);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_showing);
             this.Controls.Add(this.label_clientIp);
             this.Controls.Add(this.comboBox_clients);
@@ -133,6 +151,7 @@
             this.Controls.Add(this.button_start);
             this.Controls.Add(this.textBox_send);
             this.Controls.Add(this.button_send);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageServer";
             this.Text = "服务器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MessageServer_FormClosed);
@@ -151,6 +170,7 @@
         private System.Windows.Forms.ComboBox comboBox_clients;
         private System.Windows.Forms.Label label_clientIp;
         private System.Windows.Forms.RichTextBox textBox_showing;
+        private System.Windows.Forms.Label label1;
     }
 }
 
